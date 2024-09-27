@@ -1,0 +1,21 @@
+{
+    "name": "Candidatos Refatorado",
+    "short_name": "Candidatos",
+    "description": "lista de candidatoes a vereadores",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#151423",
+    "icons": [
+      {
+        "src": "/images/icon.png",
+        "sizes": "48x48",
+        "type": "image/png"
+      },
+      {
+        "src": "/images/logo.jpeg",
+        "sizes": "512x512",
+        "type": "image/jpeg"
+      }
+    ]
+  }
