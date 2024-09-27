@@ -39,12 +39,14 @@ function verificarRedes(linkRedes, isUnique, rede){
             img.src = 'images/instagram.svg'
             img.id = isUnique ? 'uniqueIcon' : 'logo-instagram';
             link.href = linkRedes
+            link.target = '_blank';
             link.appendChild(img);
             return link;
         } else if(rede == 'facebook') {
             img.src = 'images/facebook.svg'
             img.id = isUnique ? 'uniqueIcon' : 'logo-facebook';
             link.href = linkRedes
+            link.target = '_blank';
             link.appendChild(img);
             return link;
         }
