@@ -16,10 +16,12 @@ if ('serviceWorker' in navigator) {
 let selectCidades = document.querySelector('#lista-cidades');
 let listaCidades = [];
 
+// Função para criar as options do select
 function criarOption(listaSet){
     listaCidades = Array.from(listaSet)
     listaCidades.sort((a, b) => a.localeCompare(b)); // Ordena as cidades por ordem alfabética, ignorando os acentos
     
+    // Passa por todas as cidades e cria as options do select
     listaCidades.forEach(cidade => {
         let option = document.createElement('option');
         option.value = cidade;
@@ -28,6 +30,7 @@ function criarOption(listaSet){
     })
 }
 
+// Função para verificar e criar links para as redes sociais
 function verificarRedes(linkRedes, isUnique, rede){
     if (linkRedes) {
         const link = document.createElement('a');
@@ -46,9 +49,10 @@ function verificarRedes(linkRedes, isUnique, rede){
             return link;
         }
     }
-    return false;
+    return false; // Retorna falso se não houver link de rede social
 }
 
+// Função para criar o perfil do candidato
 function criarPerfil(candidato){
      // Variáveis de elementos do perfil
      const perfilDiv = document.createElement('div');
@@ -63,7 +67,7 @@ function criarPerfil(candidato){
 
      const temInstagram = !!candidato.instagram;
      const temFacebook = !!candidato.facebook;
-     const isUnique = temInstagram !== temFacebook;
+     const isUnique = temInstagram !== temFacebook; // Verifica se apenas uma rede social está presente
 
      // Definindo id dos elementos do perfil
      perfilDiv.className = 'candidatos-perfil';
@@ -88,22 +92,21 @@ function criarPerfil(candidato){
      capitalize = candidato.nomeCompleto.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
      nomeCompleto.textContent = capitalize
 
+    // Adiciona os elementos do perfil na div do perfil
      perfilDiv.appendChild(foto);
      perfilDiv.appendChild(nomeUrna);
      perfilDiv.appendChild(numeroUrna);
      perfilDiv.appendChild(nomeCompleto)
      perfilDiv.appendChild(cidade);
      perfilDiv.appendChild(partido);
-     if (instagram) {
-        perfilDiv.appendChild(instagram);
-    }
-    if (facebook) {
-        perfilDiv.appendChild(facebook);
-    }
+     
+     if (instagram) { perfilDiv.appendChild(instagram); }  // Verifica e adiciona o ícone do Instagram
+     if (facebook) { perfilDiv.appendChild(facebook); }    // Verifica e adiciona o ícone do Facebook
 
-     return perfilDiv;
+     return perfilDiv; // Retorna a div do perfil preenchida
 }
 
+// Evento que ocorre quando o documento é totalmente carregado
 document.addEventListener('DOMContentLoaded', () => {
     fetch("./candidatos.json").then((response) => {
         response.json().then((dados) => {
@@ -117,9 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
             });
+
+                // Chama a função para criar as options no select
                 criarOption(cidadesSet);
 
-                    
                 // Evento escutando dentro do select
                 selectCidades.addEventListener('change',() => {
                     let divCandidatos = document.querySelector('.candidatos-container');
