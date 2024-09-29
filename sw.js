@@ -7,19 +7,31 @@ self.addEventListener('install', event => {
           '/manifest.json',
           '/index.html',
           '/css/style.css',
-          '/js/main.js'
+          '/js/main.js',
+          'images/facebook.svg',
+          'images/instagram.svg',
+          'images/profile.png'
         ]);
       })
     );
   });
   
   self.addEventListener('fetch', event => {
-    event.respondWith(
-      caches.match(event.request).then(response => {
-        return response || fetch(event.request);
-      })
-    );
+    if (event.request.destination === 'image') {
+      event.respondWith(
+        fetch(event.request).catch(() => {
+          return caches.match('images/profile.png');
+        })
+      );
+    } else {
+      event.respondWith(
+        caches.match(event.request).then(response => {
+          return response || fetch(event.request);
+        })
+      );
+    }
   });
+  
   
   self.addEventListener('notificationclick', event => {
     event.notification.close();
